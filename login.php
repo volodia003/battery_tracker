@@ -4,7 +4,7 @@ require_once 'config/auth.php';
 
 // Redirect if already logged in
 if (isLoggedIn()) {
-    redirect('index.php');
+    redirect('dashboard.php');
 }
 
 $error = '';
@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $error = 'Пожалуйста, заполните все поля';
     } else {
         if (login($username, $password)) {
-            redirect('index.php');
+            redirect('dashboard.php');
         } else {
             $error = 'Неверное имя пользователя или пароль';
         }

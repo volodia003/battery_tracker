@@ -4,7 +4,7 @@ require_once 'config/auth.php';
 
 // Redirect if already logged in
 if (isLoggedIn()) {
-    redirect('index.php');
+    redirect('dashboard.php');
 }
 
 $error = '';
@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $result = register($username, $password, $email);
         
         if ($result['success']) {
-            redirect('index.php');
+            redirect('dashboard.php');
         } else {
             $error = $result['message'];
         }

@@ -25,7 +25,7 @@ $currentUser = currentUser();
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand d-flex align-items-center" href="index.php">
+            <a class="navbar-brand d-flex align-items-center" href="dashboard.php">
                 <i class="bi bi-battery-charging me-2"></i>
                 <span>Battery Tracker</span>
             </a>
@@ -37,7 +37,7 @@ $currentUser = currentUser();
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link <?= basename($_SERVER['PHP_SELF']) == 'index.php' ? 'active' : '' ?>" href="index.php">
+                        <a class="nav-link <?= basename($_SERVER['PHP_SELF']) == 'dashboard.php' ? 'active' : '' ?>" href="dashboard.php">
                             <i class="bi bi-speedometer2 me-1"></i> Главная
                         </a>
                     </li>

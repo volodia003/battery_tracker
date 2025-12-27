@@ -36,11 +36,11 @@
 ССЫЛКИ
 ──────
 
-Стартовая:   http://localhost/battery_tracker/landing.php
-Сайт:        http://localhost/battery_tracker/
-Вход:        http://localhost/battery_tracker/login.php
-Регистрация: http://localhost/battery_tracker/register.php
-phpMyAdmin:  http://localhost/phpmyadmin/
+Главная страница: http://localhost/battery_tracker/
+Вход:             http://localhost/battery_tracker/login.php
+Регистрация:      http://localhost/battery_tracker/register.php
+Дашборд:          http://localhost/battery_tracker/dashboard.php
+phpMyAdmin:       http://localhost/phpmyadmin/
 
 УЧЕТНЫЕ ДАННЫЕ ПО УМОЛЧАНИЮ
 ────────────────────────────
