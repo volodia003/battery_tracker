@@ -1,12 +1,18 @@
 <?php
 require_once __DIR__ . '/../config/database.php';
+require_once __DIR__ . '/../config/auth.php';
+
+// Require authentication for all pages that include this header
+requireAuth();
 
 $lowHealthDevices = db()->fetchAll(
     "SELECT * FROM devices WHERE battery_health < 80 ORDER BY battery_health ASC"
 );
+
+$currentUser = currentUser();
 ?>
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" data-theme="<?= getTheme() ?>">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -52,38 +58,98 @@ $lowHealthDevices = db()->fetchAll(
                     </li>
                 </ul>
                 
-                <div class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle position-relative" href="#" id="notificationsDropdown" role="button" data-bs-toggle="dropdown">
-                        <i class="bi bi-bell"></i>
-                        <?php if (count($lowHealthDevices) > 0): ?>
-                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                            <?= count($lowHealthDevices) ?>
-                        </span>
-                        <?php endif; ?>
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-end notifications-dropdown" aria-labelledby="notificationsDropdown">
-                        <li><h6 class="dropdown-header">Уведомления</h6></li>
-                        <?php if (count($lowHealthDevices) > 0): ?>
-                            <?php foreach ($lowHealthDevices as $device): ?>
+                <div class="d-flex align-items-center gap-2">
+                    <div class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle position-relative" href="#" id="notificationsDropdown" role="button" data-bs-toggle="dropdown">
+                            <i class="bi bi-bell"></i>
+                            <?php if (count($lowHealthDevices) > 0): ?>
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                <?= count($lowHealthDevices) ?>
+                            </span>
+                            <?php endif; ?>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end notifications-dropdown" aria-labelledby="notificationsDropdown">
+                            <li><h6 class="dropdown-header">Уведомления</h6></li>
+                            <?php if (count($lowHealthDevices) > 0): ?>
+                                <?php foreach ($lowHealthDevices as $device): ?>
+                                <li>
+                                    <a class="dropdown-item d-flex align-items-center" href="device_view.php?id=<?= $device['id'] ?>">
+                                        <i class="bi bi-exclamation-triangle-fill text-warning me-2"></i>
+                                        <div>
+                                            <strong><?= sanitize($device['model']) ?></strong>
+                                            <br>
+                                            <small class="text-muted">Здоровье батареи: <?= $device['battery_health'] ?>%</small>
+                                        </div>
+                                    </a>
+                                </li>
+                                <?php endforeach; ?>
+                            <?php else: ?>
+                                <li><span class="dropdown-item text-muted">Нет уведомлений</span></li>
+                            <?php endif; ?>
+                        </ul>
+                    </div>
+                    
+                    <button class="btn btn-sm btn-outline-light" onclick="toggleTheme()" title="Сменить тему" id="themeToggle">
+                        <i class="bi bi-moon-stars-fill"></i>
+                    </button>
+                    
+                    <div class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown">
+                            <i class="bi bi-person-circle me-1"></i>
+                            <span><?= sanitize($currentUser['username']) ?></span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
                             <li>
-                                <a class="dropdown-item d-flex align-items-center" href="device_view.php?id=<?= $device['id'] ?>">
-                                    <i class="bi bi-exclamation-triangle-fill text-warning me-2"></i>
-                                    <div>
-                                        <strong><?= sanitize($device['model']) ?></strong>
-                                        <br>
-                                        <small class="text-muted">Здоровье батареи: <?= $device['battery_health'] ?>%</small>
+                                <span class="dropdown-item-text">
+                                    <div class="d-flex align-items-center">
+                                        <i class="bi bi-person-circle me-2 fs-3"></i>
+                                        <div>
+                                            <div class="fw-bold"><?= sanitize($currentUser['username']) ?></div>
+                                            <?php if ($currentUser['email']): ?>
+                                            <small class="text-muted"><?= sanitize($currentUser['email']) ?></small>
+                                            <?php endif; ?>
+                                        </div>
                                     </div>
+                                </span>
+                            </li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <a class="dropdown-item" href="logout.php">
+                                    <i class="bi bi-box-arrow-right me-2"></i>
+                                    Выйти
                                 </a>
                             </li>
-                            <?php endforeach; ?>
-                        <?php else: ?>
-                            <li><span class="dropdown-item text-muted">Нет уведомлений</span></li>
-                        <?php endif; ?>
-                    </ul>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
     </nav>
+    
+    <script>
+        function toggleTheme() {
+            fetch('toggle_theme.php')
+                .then(response => response.json())
+                .then(data => {
+                    document.documentElement.setAttribute('data-theme', data.theme);
+                    updateThemeIcon(data.theme);
+                });
+        }
+        
+        function updateThemeIcon(theme) {
+            const icon = document.querySelector('#themeToggle i');
+            if (theme === 'dark') {
+                icon.className = 'bi bi-sun-fill';
+            } else {
+                icon.className = 'bi bi-moon-stars-fill';
+            }
+        }
+        
+        // Set initial icon
+        document.addEventListener('DOMContentLoaded', function() {
+            updateThemeIcon(document.documentElement.getAttribute('data-theme'));
+        });
+    </script>
 
     <main class="main-content">
         <div class="container-fluid py-4">

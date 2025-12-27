@@ -46,7 +46,9 @@ CREATE TABLE IF NOT EXISTS battery_health_logs (
     FOREIGN KEY (device_id) REFERENCES devices(id) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
-INSERT INTO users (username, password, email) VALUES ('admin', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'admin@example.com');
+-- Default user will be created when you run setup_user.php
+-- Or you can register a new user through the registration page
+-- Default credentials: user123 / pas123
 
 CREATE INDEX idx_devices_type ON devices(type);
 CREATE INDEX idx_devices_health ON devices(battery_health);
