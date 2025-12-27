@@ -228,7 +228,10 @@ document.addEventListener('DOMContentLoaded', function() {
         return 'rgba(220, 53, 69, 0.8)';
     });
     
-    new Chart(ctx, {
+    const theme = document.documentElement.getAttribute('data-theme');
+    const isDark = theme === 'dark';
+    
+    const chart = new Chart(ctx, {
         type: 'bar',
         data: {
             labels: labels,
@@ -253,15 +256,31 @@ document.addEventListener('DOMContentLoaded', function() {
                 y: {
                     beginAtZero: true,
                     max: 100,
+                    grid: {
+                        color: isDark ? '#404040' : '#e0e0e0'
+                    },
                     ticks: {
+                        color: isDark ? '#b0b0b0' : '#666',
                         callback: function(value) {
                             return value + '%';
                         }
+                    }
+                },
+                x: {
+                    grid: {
+                        color: isDark ? '#404040' : '#e0e0e0'
+                    },
+                    ticks: {
+                        color: isDark ? '#b0b0b0' : '#666'
                     }
                 }
             }
         }
     });
+    
+    // Store chart instance globally
+    window.chartInstances = window.chartInstances || [];
+    window.chartInstances.push(chart);
 });
 </script>
 

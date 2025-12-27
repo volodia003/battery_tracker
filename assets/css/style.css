@@ -473,6 +473,12 @@ canvas {
     border-color: #404040 !important;
 }
 
+[data-theme="dark"] .card-header.bg-white,
+[data-theme="dark"] .bg-white {
+    background-color: #252525 !important;
+    color: #e0e0e0;
+}
+
 [data-theme="dark"] .table {
     color: #e0e0e0;
 }
@@ -585,6 +591,85 @@ canvas {
 
 [data-theme="dark"] .bg-light {
     background-color: #2d2d2d !important;
+    color: #e0e0e0;
+}
+
+[data-theme="dark"] a {
+    color: #4d9fff;
+}
+
+[data-theme="dark"] a:hover {
+    color: #6bb0ff;
+}
+
+[data-theme="dark"] code {
+    background-color: #383838;
+    color: #4d9fff;
+}
+
+[data-theme="dark"] .list-group-item {
+    background-color: transparent;
+    color: #e0e0e0;
+    border-color: #404040;
+}
+
+[data-theme="dark"] hr {
+    border-color: #404040;
+    opacity: 1;
+}
+
+[data-theme="dark"] .rounded,
+[data-theme="dark"] .p-3.bg-light.rounded {
+    background-color: #383838 !important;
+}
+
+[data-theme="dark"] .text-primary {
+    color: #4d9fff !important;
+}
+
+[data-theme="dark"] .text-warning {
+    color: #ffb74d !important;
+}
+
+[data-theme="dark"] .text-info {
+    color: #4dd0e1 !important;
+}
+
+[data-theme="dark"] .text-success {
+    color: #3ddc84 !important;
+}
+
+[data-theme="dark"] small {
+    color: #b0b0b0;
+}
+
+[data-theme="dark"] strong {
+    color: #e0e0e0;
+}
+
+/* Chart.js dark theme support */
+[data-theme="dark"] canvas {
+    filter: brightness(0.9);
+}
+
+[data-theme="dark"] .empty-state i {
+    color: #505050 !important;
+}
+
+[data-theme="dark"] p {
+    color: #e0e0e0;
+}
+
+[data-theme="dark"] h1, 
+[data-theme="dark"] h2, 
+[data-theme="dark"] h3, 
+[data-theme="dark"] h4, 
+[data-theme="dark"] h5, 
+[data-theme="dark"] h6 {
+    color: #e0e0e0;
+}
+
+[data-theme="dark"] .card-title {
     color: #e0e0e0;
 }
 

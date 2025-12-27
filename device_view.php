@@ -255,7 +255,10 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     const data = logs.map(l => parseFloat(l.health_percent));
     
-    new Chart(ctx, {
+    const theme = document.documentElement.getAttribute('data-theme');
+    const isDark = theme === 'dark';
+    
+    const chart = new Chart(ctx, {
         type: 'line',
         data: {
             labels: labels,
@@ -283,15 +286,30 @@ document.addEventListener('DOMContentLoaded', function() {
                     beginAtZero: false,
                     min: 0,
                     max: 100,
+                    grid: {
+                        color: isDark ? '#404040' : '#e0e0e0'
+                    },
                     ticks: {
+                        color: isDark ? '#b0b0b0' : '#666',
                         callback: function(value) {
                             return value + '%';
                         }
+                    }
+                },
+                x: {
+                    grid: {
+                        color: isDark ? '#404040' : '#e0e0e0'
+                    },
+                    ticks: {
+                        color: isDark ? '#b0b0b0' : '#666'
                     }
                 }
             }
         }
     });
+    
+    window.chartInstances = window.chartInstances || [];
+    window.chartInstances.push(chart);
 });
 
 function deleteCharge(id) {
