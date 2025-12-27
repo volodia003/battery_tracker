@@ -420,6 +420,26 @@ canvas {
     margin-bottom: 1rem;
 }
 
+/* Light Theme - Fix navbar icon visibility */
+.btn-outline-light {
+    color: rgba(255, 255, 255, 0.9);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.btn-outline-light:hover {
+    color: #fff;
+    background-color: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.navbar-dark .nav-link {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.navbar-dark .nav-link:hover {
+    color: #fff;
+}
+
 /* Dark Theme Styles */
 [data-theme="dark"] {
     --primary-color: #4d9fff;
@@ -560,6 +580,12 @@ canvas {
 
 [data-theme="dark"] .device-icon {
     background-color: #383838;
+    color: #4d9fff;
+}
+
+[data-theme="dark"] .bg-light {
+    background-color: #2d2d2d !important;
+    color: #e0e0e0;
 }
 
 [data-theme="dark"] .battery-body {
