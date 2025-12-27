@@ -149,14 +149,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <a href="register.php" class="text-decoration-none">Зарегистрироваться</a>
                     </p>
                 </div>
-                
-                <div class="alert alert-info mt-3 mb-0">
-                    <small>
-                        <strong>Тестовый аккаунт:</strong><br>
-                        Логин: <code>user123</code><br>
-                        Пароль: <code>pas123</code>
-                    </small>
-                </div>
             </div>
         </div>
     </div>
