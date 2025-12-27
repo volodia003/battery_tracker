@@ -420,7 +420,19 @@ canvas {
     margin-bottom: 1rem;
 }
 
-/* Light Theme - Fix navbar icon visibility */
+/* Light Theme - Ensure navbar and footer text is always visible */
+.navbar-dark {
+    background-color: #212529 !important;
+}
+
+.navbar-dark .navbar-brand {
+    color: #fff !important;
+}
+
+.navbar-dark .navbar-brand:hover {
+    color: #fff !important;
+}
+
 .btn-outline-light {
     color: rgba(255, 255, 255, 0.9) !important;
     border-color: rgba(255, 255, 255, 0.3);
@@ -446,6 +458,27 @@ canvas {
 
 .navbar-dark .dropdown-toggle:hover {
     color: #fff !important;
+}
+
+/* Footer text visibility fix */
+.footer.bg-dark {
+    background-color: #212529 !important;
+}
+
+.footer.bg-dark .text-muted {
+    color: rgba(255, 255, 255, 0.6) !important;
+}
+
+.footer.bg-dark .text-light {
+    color: #f8f9fa !important;
+}
+
+.footer.bg-dark i {
+    color: rgba(255, 255, 255, 0.6) !important;
+}
+
+.footer.bg-dark span {
+    color: rgba(255, 255, 255, 0.6) !important;
 }
 
 /* Dark Theme Styles */
@@ -748,9 +781,41 @@ canvas {
     background-color: #383838;
 }
 
+[data-theme="dark"] .navbar-dark {
+    background-color: #2d2d2d !important;
+}
+
+[data-theme="dark"] .navbar-dark .navbar-brand {
+    color: #fff !important;
+}
+
+[data-theme="dark"] .navbar-dark .navbar-brand:hover {
+    color: #fff !important;
+}
+
 [data-theme="dark"] .footer {
     background-color: #2d2d2d !important;
     border-color: #404040;
+}
+
+[data-theme="dark"] .footer.bg-dark {
+    background-color: #2d2d2d !important;
+}
+
+[data-theme="dark"] .footer.bg-dark .text-muted {
+    color: rgba(255, 255, 255, 0.6) !important;
+}
+
+[data-theme="dark"] .footer.bg-dark .text-light {
+    color: #f8f9fa !important;
+}
+
+[data-theme="dark"] .footer.bg-dark i {
+    color: rgba(255, 255, 255, 0.6) !important;
+}
+
+[data-theme="dark"] .footer.bg-dark span {
+    color: rgba(255, 255, 255, 0.6) !important;
 }
 
 [data-theme="dark"] .btn-outline-light {
