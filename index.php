@@ -116,64 +116,41 @@
             transform: translateY(-2px);
         }
         
-        .task-section {
+        .benefits-section {
             background: #f8f9fa;
             padding: 2rem;
             border-radius: 15px;
             margin-top: 2rem;
         }
         
-        .task-section h4 {
+        .benefits-section h4 {
             color: #667eea;
             font-weight: 700;
             margin-bottom: 1.5rem;
+            text-align: center;
         }
         
-        .task-list {
-            list-style: none;
-            padding: 0;
-        }
-        
-        .task-list li {
-            padding: 0.75rem 0;
-            border-bottom: 1px solid #dee2e6;
+        .benefit-item {
             display: flex;
-            align-items: center;
+            align-items: start;
+            padding: 1rem 0;
         }
         
-        .task-list li:last-child {
-            border-bottom: none;
-        }
-        
-        .task-list li i {
+        .benefit-item i {
             color: #667eea;
+            font-size: 1.5rem;
             margin-right: 1rem;
-            font-size: 1.2rem;
+            margin-top: 0.2rem;
         }
         
-        .credentials-box {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 1.5rem;
-            border-radius: 15px;
-            margin-top: 2rem;
+        .benefit-item h6 {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
         }
         
-        .credentials-box h5 {
-            font-weight: 700;
-            margin-bottom: 1rem;
-        }
-        
-        .credentials-box .cred-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 0.5rem 0;
-            font-size: 1.1rem;
-        }
-        
-        .credentials-box .cred-value {
-            font-weight: 700;
-            font-family: 'Courier New', monospace;
+        .benefit-item p {
+            margin: 0;
+            color: #6c757d;
         }
     </style>
 </head>
@@ -220,49 +197,71 @@
                 </div>
             </div>
             
-            <div class="task-section">
-                <h4><i class="bi bi-list-check me-2"></i>Демо-задания в системе</h4>
-                <p class="text-muted">После входа в систему вы найдете тестовые данные для ознакомления:</p>
-                <ul class="task-list">
-                    <li>
-                        <i class="bi bi-1-circle-fill"></i>
-                        <span><strong>3 устройства:</strong> смартфон, ноутбук и беспроводные наушники</span>
-                    </li>
-                    <li>
-                        <i class="bi bi-2-circle-fill"></i>
-                        <span><strong>5 записей о зарядках</strong> для смартфона за разные даты</span>
-                    </li>
-                    <li>
-                        <i class="bi bi-3-circle-fill"></i>
-                        <span><strong>Сниженное здоровье батареи</strong> ноутбука (ниже 80%)</span>
-                    </li>
-                    <li>
-                        <i class="bi bi-4-circle-fill"></i>
-                        <span><strong>График здоровья батареи</strong> для анализа деградации смартфона</span>
-                    </li>
-                    <li>
-                        <i class="bi bi-5-circle-fill"></i>
-                        <span><strong>Фильтр устройств</strong> с здоровьем батареи ниже 80%</span>
-                    </li>
-                </ul>
-            </div>
-            
-            <div class="credentials-box">
-                <h5><i class="bi bi-key me-2"></i>Данные для входа</h5>
-                <div class="cred-item">
-                    <span>Логин:</span>
-                    <span class="cred-value">user123</span>
-                </div>
-                <div class="cred-item">
-                    <span>Пароль:</span>
-                    <span class="cred-value">pas123</span>
+            <div class="benefits-section">
+                <h4>Возможности системы</h4>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="benefit-item">
+                            <i class="bi bi-shield-check"></i>
+                            <div>
+                                <h6>Автоматический расчет деградации</h6>
+                                <p>Система учитывает тип зарядки и автоматически рассчитывает износ батареи</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="benefit-item">
+                            <i class="bi bi-bar-chart-line"></i>
+                            <div>
+                                <h6>Графики и прогнозы</h6>
+                                <p>Визуализация изменения здоровья батареи и прогноз срока службы</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="benefit-item">
+                            <i class="bi bi-bell"></i>
+                            <div>
+                                <h6>Уведомления</h6>
+                                <p>Получайте оповещения о критическом состоянии батарей</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="benefit-item">
+                            <i class="bi bi-funnel"></i>
+                            <div>
+                                <h6>Фильтрация и поиск</h6>
+                                <p>Быстро находите нужные устройства по различным параметрам</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="benefit-item">
+                            <i class="bi bi-moon-stars"></i>
+                            <div>
+                                <h6>Темная тема</h6>
+                                <p>Удобный интерфейс со светлой и темной темами оформления</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="benefit-item">
+                            <i class="bi bi-database"></i>
+                            <div>
+                                <h6>История зарядок</h6>
+                                <p>Полный учет всех циклов зарядки с датами и типами</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             
             <div class="text-center mt-4">
-                <a href="login.php" class="btn btn-primary btn-lg">
-                    <i class="bi bi-rocket-takeoff me-2"></i>Начать работу
+                <a href="register.php" class="btn btn-primary btn-lg">
+                    <i class="bi bi-rocket-takeoff me-2"></i>Создать аккаунт
                 </a>
+                <p class="mt-3 text-muted">Уже есть аккаунт? <a href="login.php" class="text-decoration-none">Войти</a></p>
             </div>
         </div>
     </div>
