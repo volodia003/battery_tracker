@@ -52,6 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             justify-content: center;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             padding: 2rem 0;
+            transition: background 0.3s ease;
         }
         
         .auth-card {
@@ -62,6 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
             overflow: hidden;
             margin: 1rem;
+            transition: background 0.3s ease, box-shadow 0.3s ease;
         }
         
         .auth-header {
@@ -96,11 +98,85 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             cursor: pointer;
             transition: all 0.3s ease;
             font-size: 1.5rem;
+            z-index: 10;
         }
         
         .theme-toggle-btn:hover {
             background: rgba(255, 255, 255, 0.3);
             transform: rotate(180deg);
+        }
+        
+        /* Dark theme styles for auth pages */
+        [data-theme="dark"] .auth-container {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        }
+        
+        [data-theme="dark"] .auth-card {
+            background: #2d2d2d;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+        }
+        
+        [data-theme="dark"] .auth-body {
+            background: #2d2d2d;
+            color: #e0e0e0;
+        }
+        
+        [data-theme="dark"] .form-label {
+            color: #b0b0b0;
+        }
+        
+        [data-theme="dark"] .form-control {
+            background-color: #383838;
+            border-color: #505050;
+            color: #e0e0e0;
+        }
+        
+        [data-theme="dark"] .form-control:focus {
+            background-color: #404040;
+            border-color: #667eea;
+            color: #e0e0e0;
+        }
+        
+        [data-theme="dark"] .form-control::placeholder {
+            color: #888;
+        }
+        
+        [data-theme="dark"] .input-group-text {
+            background-color: #383838;
+            border-color: #505050;
+            color: #e0e0e0;
+        }
+        
+        [data-theme="dark"] .text-muted {
+            color: #888 !important;
+        }
+        
+        [data-theme="dark"] .text-danger {
+            color: #ff5252 !important;
+        }
+        
+        [data-theme="dark"] .alert-danger {
+            background-color: #3d2020;
+            border-color: #5d3030;
+            color: #ff5252;
+        }
+        
+        [data-theme="dark"] .alert-success {
+            background-color: #1f3d2d;
+            border-color: #2f5d3d;
+            color: #3ddc84;
+        }
+        
+        [data-theme="dark"] .btn-close {
+            filter: invert(1) grayscale(100%) brightness(200%);
+        }
+        
+        [data-theme="dark"] a {
+            color: #4d9fff;
+        }
+        
+        [data-theme="dark"] a:hover {
+            color: #6bb0ff;
         }
     </style>
 </head>
@@ -205,20 +281,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 .then(data => {
                     document.documentElement.setAttribute('data-theme', data.theme);
                     updateThemeIcon(data.theme);
+                    applyTheme(data.theme);
                 });
         }
         
         function updateThemeIcon(theme) {
             const icon = document.querySelector('.theme-toggle-btn i');
-            if (theme === 'dark') {
-                icon.className = 'bi bi-sun-fill';
-            } else {
-                icon.className = 'bi bi-moon-stars-fill';
+            if (icon) {
+                if (theme === 'dark') {
+                    icon.className = 'bi bi-sun-fill';
+                } else {
+                    icon.className = 'bi bi-moon-stars-fill';
+                }
             }
         }
         
-        // Set initial icon
-        updateThemeIcon(document.documentElement.getAttribute('data-theme'));
+        function applyTheme(theme) {
+            // Force reflow to ensure styles are applied
+            document.body.style.display = 'none';
+            document.body.offsetHeight; // Trigger reflow
+            document.body.style.display = '';
+        }
+        
+        // Set initial theme
+        document.addEventListener('DOMContentLoaded', function() {
+            const theme = document.documentElement.getAttribute('data-theme');
+            updateThemeIcon(theme);
+            applyTheme(theme);
+        });
     </script>
 </body>
 </html>

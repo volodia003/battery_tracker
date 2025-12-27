@@ -296,11 +296,16 @@ $topCharged = db()->fetchAll(
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+    const theme = document.documentElement.getAttribute('data-theme');
+    const isDark = theme === 'dark';
+    
+    window.chartInstances = window.chartInstances || [];
+    
     <?php if (count($healthLogs) > 1): ?>
     const healthCtx = document.getElementById('healthChart').getContext('2d');
     const healthLogs = <?= json_encode($healthLogs) ?>;
     
-    new Chart(healthCtx, {
+    const healthChart = new Chart(healthCtx, {
         type: 'line',
         data: {
             labels: healthLogs.map(l => {
@@ -322,26 +327,44 @@ document.addEventListener('DOMContentLoaded', function() {
             responsive: true,
             maintainAspectRatio: false,
             plugins: {
-                legend: { display: false }
+                legend: { 
+                    display: false,
+                    labels: {
+                        color: isDark ? '#b0b0b0' : '#666'
+                    }
+                }
             },
             scales: {
                 y: {
                     min: 0,
                     max: 100,
+                    grid: {
+                        color: isDark ? '#404040' : '#e0e0e0'
+                    },
                     ticks: {
+                        color: isDark ? '#b0b0b0' : '#666',
                         callback: function(value) { return value + '%'; }
+                    }
+                },
+                x: {
+                    grid: {
+                        color: isDark ? '#404040' : '#e0e0e0'
+                    },
+                    ticks: {
+                        color: isDark ? '#b0b0b0' : '#666'
                     }
                 }
             }
         }
     });
+    window.chartInstances.push(healthChart);
     <?php endif; ?>
     
     <?php if (count($chargeLogs) > 0): ?>
     const chargeCtx = document.getElementById('chargeChart').getContext('2d');
     const chargeLogs = <?= json_encode($chargeLogs) ?>;
     
-    new Chart(chargeCtx, {
+    const chargeChart = new Chart(chargeCtx, {
         type: 'bar',
         data: {
             labels: chargeLogs.map(l => l.month),
@@ -366,12 +389,36 @@ document.addEventListener('DOMContentLoaded', function() {
         options: {
             responsive: true,
             maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: isDark ? '#b0b0b0' : '#666'
+                    }
+                }
+            },
             scales: {
-                x: { stacked: true },
-                y: { stacked: true }
+                x: { 
+                    stacked: true,
+                    grid: {
+                        color: isDark ? '#404040' : '#e0e0e0'
+                    },
+                    ticks: {
+                        color: isDark ? '#b0b0b0' : '#666'
+                    }
+                },
+                y: { 
+                    stacked: true,
+                    grid: {
+                        color: isDark ? '#404040' : '#e0e0e0'
+                    },
+                    ticks: {
+                        color: isDark ? '#b0b0b0' : '#666'
+                    }
+                }
             }
         }
     });
+    window.chartInstances.push(chargeChart);
     <?php endif; ?>
     
     <?php if (count($deviceTypes) > 0): ?>
@@ -386,7 +433,7 @@ document.addEventListener('DOMContentLoaded', function() {
         'other': 'Другое'
     };
     
-    new Chart(typeCtx, {
+    const typeChart = new Chart(typeCtx, {
         type: 'doughnut',
         data: {
             labels: deviceTypes.map(t => typeLabels[t.type] || t.type),
@@ -407,11 +454,15 @@ document.addEventListener('DOMContentLoaded', function() {
             maintainAspectRatio: false,
             plugins: {
                 legend: {
-                    position: 'right'
+                    position: 'right',
+                    labels: {
+                        color: isDark ? '#b0b0b0' : '#666'
+                    }
                 }
             }
         }
     });
+    window.chartInstances.push(typeChart);
     <?php endif; ?>
 });
 </script>

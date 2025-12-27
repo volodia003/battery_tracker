@@ -133,22 +133,50 @@ $currentUser = currentUser();
                 .then(data => {
                     document.documentElement.setAttribute('data-theme', data.theme);
                     updateThemeIcon(data.theme);
+                    updateChartTheme(data.theme);
                 });
         }
         
         function updateThemeIcon(theme) {
             const icon = document.querySelector('#themeToggle i');
-            if (theme === 'dark') {
-                icon.className = 'bi bi-sun-fill';
-            } else {
-                icon.className = 'bi bi-moon-stars-fill';
+            if (icon) {
+                if (theme === 'dark') {
+                    icon.className = 'bi bi-sun-fill';
+                } else {
+                    icon.className = 'bi bi-moon-stars-fill';
+                }
             }
         }
         
-        // Set initial icon
+        function updateChartTheme(theme) {
+            // Update Chart.js default colors for theme
+            if (typeof Chart !== 'undefined') {
+                const isDark = theme === 'dark';
+                Chart.defaults.color = isDark ? '#b0b0b0' : '#666';
+                Chart.defaults.borderColor = isDark ? '#404040' : '#e0e0e0';
+                
+                // Reload all charts if they exist
+                if (window.chartInstances) {
+                    window.chartInstances.forEach(chart => {
+                        chart.options.scales.y.grid.color = isDark ? '#404040' : '#e0e0e0';
+                        chart.options.scales.x.grid.color = isDark ? '#404040' : '#e0e0e0';
+                        chart.options.scales.y.ticks.color = isDark ? '#b0b0b0' : '#666';
+                        chart.options.scales.x.ticks.color = isDark ? '#b0b0b0' : '#666';
+                        chart.update();
+                    });
+                }
+            }
+        }
+        
+        // Set initial icon and theme
         document.addEventListener('DOMContentLoaded', function() {
-            updateThemeIcon(document.documentElement.getAttribute('data-theme'));
+            const theme = document.documentElement.getAttribute('data-theme');
+            updateThemeIcon(theme);
+            updateChartTheme(theme);
         });
+        
+        // Global array to store chart instances
+        window.chartInstances = window.chartInstances || [];
     </script>
 
     <main class="main-content">
