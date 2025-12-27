@@ -1,3 +1,12 @@
+<?php
+require_once 'config/database.php';
+require_once 'config/auth.php';
+
+// Redirect to dashboard if already logged in
+if (isLoggedIn()) {
+    redirect('dashboard.php');
+}
+?>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -255,13 +264,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            
-            <div class="text-center mt-4">
-                <a href="register.php" class="btn btn-primary btn-lg">
-                    <i class="bi bi-rocket-takeoff me-2"></i>Создать аккаунт
-                </a>
-                <p class="mt-3 text-muted">Уже есть аккаунт? <a href="login.php" class="text-decoration-none">Войти</a></p>
             </div>
         </div>
     </div>
